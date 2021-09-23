@@ -16,11 +16,15 @@ export class ProjectService {
   }
 
   async findAll(): Promise<Project[]> {
-    return this.projectRepository.find();
+    return this.projectRepository.find({
+      relations: ['employees'],
+    });
   }
 
   async findOne(id: string): Promise<Project> {
-    return this.projectRepository.findOne(id);
+    return this.projectRepository.findOne(id, {
+      relations: ['employees'],
+    });
   }
 
   update(id: string, updateProjectInput: UpdateProjectInput) {

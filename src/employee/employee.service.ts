@@ -18,6 +18,10 @@ export class EmployeeService {
     return this.employeeRepository.find();
   }
 
+  async findOne(id: string): Promise<Employee> {
+    return this.employeeRepository.findOne(id);
+  }
+
   async create(employee: EmployeeCreateDto): Promise<Employee> {
     const emp = this.employeeRepository.create(employee);
     return this.employeeRepository.save(emp);

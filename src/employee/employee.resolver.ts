@@ -20,6 +20,11 @@ export class EmployeeResolver {
     return this.employeeService.findAll();
   }
 
+  @Query(() => Employee, { name: 'getEmployee' })
+  findOne(@Args('id') id: string) {
+    return this.employeeService.findOne(id);
+  }
+
   @Mutation(() => Employee, { name: 'createEmployee' })
   create(@Args('employeeInput') employee: EmployeeCreateDto) {
     return this.employeeService.create(employee);

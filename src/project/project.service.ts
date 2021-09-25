@@ -28,10 +28,13 @@ export class ProjectService {
   }
 
   update(id: string, updateProjectInput: UpdateProjectInput) {
-    return `This action updates a #${id} project`;
+    const project = this.projectRepository.create(updateProjectInput);
+    project.id = id;
+    return this.projectRepository.save(project);
   }
 
   remove(id: string) {
-    return `This action removes a #${id} project`;
+    // const project = this.projectRepository.findOne(id);
+    return 'in the remove';
   }
 }

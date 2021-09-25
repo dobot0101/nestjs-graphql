@@ -21,6 +21,7 @@ type Employee {
 
 type Query {
   getAllEmployees: [Employee!]!
+  getEmployee(id: String!): Employee!
   getAllProjects: [Project!]!
   project(id: String!): Project!
 }

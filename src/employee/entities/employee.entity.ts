@@ -40,9 +40,7 @@ export class Employee {
   // @JoinColumn({ name: 'projectId' })
   project: Project;
 
-  // @Column({ nullable: true })
-  // @Field({ nullable: true })
-  @Column()
-  @Field()
+  @Column({ nullable: true })
+  @Field({ nullable: true })
   projectId: number;
 }

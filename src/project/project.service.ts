@@ -3,7 +3,7 @@ import { CreateProjectInput } from './dto/create-project.input';
 import { UpdateProjectInput } from './dto/update-project.input';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Project } from './entities/project.entity';
-import { Repository } from 'typeorm';
+import { Repository, DeleteResult } from 'typeorm';
 
 @Injectable()
 export class ProjectService {
@@ -23,14 +23,16 @@ export class ProjectService {
     return this.projectRepository.findOne(id);
   }
 
-  update(id: number, updateProjectInput: UpdateProjectInput) {
+  async update(
+    id: number,
+    updateProjectInput: UpdateProjectInput,
+  ): Promise<Project> {
     const project = this.projectRepository.create(updateProjectInput);
     project.id = id;
-    return this.projectRepository.save(project);
+    return await this.projectRepository.save(project);
   }
 
-  remove(id: number) {
-    return this.projectRepository.delete(id);
-    // return 'in the remove';
+  async remove(id: number): Promise<DeleteResult> {
+    return await this.projectRepository.delete(id);
   }
 }

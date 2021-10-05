@@ -29,8 +29,10 @@ export class ProjectResolver {
     return this.projectService.update(project.id, project);
   }
 
-  @Mutation(() => Project)
-  removeProject(@Args('id') id: number) {
-    return this.projectService.remove(id);
+  @Mutation(() => Int)
+  async removeProject(@Args('projectId', { type: () => Int }) id: number) {
+    const result = await this.projectService.remove(id);
+    console.log(result);
+    return id;
   }
 }

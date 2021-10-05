@@ -10,6 +10,7 @@ import { Employee } from './entities/employee.entity';
 import { EmployeeService } from './employee.service';
 import { EmployeeCreateDto } from './dto/create-employee.input';
 import { Project } from 'src/project/entities/project.entity';
+import { EmployeeUpdateDto } from './dto/update-employee.input';
 
 @Resolver(() => Employee)
 export class EmployeeResolver {
@@ -30,8 +31,15 @@ export class EmployeeResolver {
     return this.employeeService.create(employee);
   }
 
+  @Mutation(() => Employee)
+  updateEmployee(@Args('employee') employee: EmployeeUpdateDto) {
+    // return this.employeeService.update(employee.id, employee);
+    return this.employeeService.update(employee);
+  }
+
   @ResolveField(() => Project)
   project(@Parent() employee: Employee) {
-    return this.employeeService.getProject(employee.projectId);
+    // return this.employeeService.getProject(employee.projectId);
+    return this.employeeService.getProject(employee.project?.id);
   }
 }

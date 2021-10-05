@@ -3,34 +3,35 @@
 # ------------------------------------------------------
 
 type Project {
-  id: String!
+  id: Int!
   name: String!
   code: Int!
   employees: [Employee!]
 }
 
 type Employee {
-  id: String!
+  id: Int!
   firstName: String!
   lastName: String!
   designation: String!
-  city: String
-  project: Project!
-  projectId: String
+  city: String!
+  project: Project
+  projectId: Float!
 }
 
 type Query {
   getAllEmployees: [Employee!]!
   getEmployee(id: String!): Employee!
   getAllProjects: [Project!]!
-  project(id: String!): Project!
+  project(id: Float!): Project!
 }
 
 type Mutation {
   createEmployee(employeeInput: EmployeeCreateDto!): Employee!
+  updateEmployee(employee: EmployeeUpdateDto!): Employee!
   createProject(project: CreateProjectInput!): Project!
   updateProject(project: UpdateProjectInput!): Project!
-  removeProject(id: String!): Project!
+  removeProject(id: Float!): Project!
 }
 
 input EmployeeCreateDto {
@@ -38,7 +39,16 @@ input EmployeeCreateDto {
   lastName: String!
   designation: String!
   city: String
-  projectId: String!
+  projectId: Int
+}
+
+input EmployeeUpdateDto {
+  id: Int!
+  firstName: String!
+  lastName: String!
+  designation: String
+  city: String
+  projectId: Int
 }
 
 input CreateProjectInput {
@@ -47,7 +57,7 @@ input CreateProjectInput {
 }
 
 input UpdateProjectInput {
-  id: String!
+  id: Int!
   name: String!
   code: Int!
 }

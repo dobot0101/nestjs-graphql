@@ -19,7 +19,8 @@ export class ProjectResolver {
   }
 
   @Query(() => Project, { name: 'project' })
-  findOne(@Args('id') id: string) {
+  // findOne(@Args('id') id: string) {
+  findOne(@Args('id') id: number) {
     return this.projectService.findOne(id);
   }
 
@@ -29,7 +30,7 @@ export class ProjectResolver {
   }
 
   @Mutation(() => Project)
-  removeProject(@Args('id') id: string) {
+  removeProject(@Args('id') id: number) {
     return this.projectService.remove(id);
   }
 }

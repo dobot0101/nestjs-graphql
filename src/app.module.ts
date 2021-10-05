@@ -10,16 +10,7 @@ import { ProjectModule } from './project/project.module';
     GraphQLModule.forRoot({
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'ldh',
-      password: 'dkagh893',
-      database: 'employee',
-      entities: ['dist/**/*.entity{.ts,.js}'],
-      synchronize: true,
-    }),
+    TypeOrmModule.forRoot(),
     ProjectModule,
   ],
   controllers: [],

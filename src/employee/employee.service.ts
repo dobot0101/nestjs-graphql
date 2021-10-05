@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Employee } from './entities/employee.entity';
-import { Repository } from 'typeorm';
+import { Repository, createQueryBuilder } from 'typeorm';
 import { EmployeeCreateDto } from './dto/create-employee.input';
 import { ProjectService } from 'src/project/project.service';
 import { Project } from 'src/project/entities/project.entity';
+import { EmployeeUpdateDto } from './dto/update-employee.input';
 
 @Injectable()
 export class EmployeeService {
@@ -15,7 +16,7 @@ export class EmployeeService {
   ) {}
 
   async findAll(): Promise<Employee[]> {
-    return this.employeeRepository.find();
+    return this.employeeRepository.find({ relations: ['project'] });
   }
 
   async findOne(id: string): Promise<Employee> {
@@ -27,7 +28,11 @@ export class EmployeeService {
     return this.employeeRepository.save(emp);
   }
 
-  async getProject(id: string): Promise<Project> {
+  async getProject(id: number): Promise<Project> {
     return this.projectService.findOne(id);
+  }
+
+  async update(employeeUpdateDto: EmployeeUpdateDto) {
+    return await this.employeeRepository.save(employeeUpdateDto);
   }
 }
